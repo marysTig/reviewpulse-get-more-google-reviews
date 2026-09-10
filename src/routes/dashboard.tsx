@@ -99,7 +99,7 @@ function Dashboard() {
         </div>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-12">
-          <div className="space-y-5 lg:col-span-7">
+          <div className="min-w-0 space-y-5 lg:col-span-7">
             {/* Business profile */}
             <div className="rise rounded-xl border border-line bg-card p-5">
               <div className="flex items-start justify-between gap-3">
