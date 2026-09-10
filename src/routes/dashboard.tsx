@@ -35,7 +35,7 @@ export const Route = createFileRoute("/dashboard")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: Dashboard;
+  component: Dashboard,
 });
 
 function Dashboard() {
