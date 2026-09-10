@@ -217,7 +217,7 @@ function Dashboard() {
           </div>
 
           {/* Request history */}
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <div className="rise rounded-xl border border-line bg-card [animation-delay:200ms]">
               <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
                 <h2 className="font-display text-lg">Request history</h2>
