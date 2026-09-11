@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/rp/Logo";
 import {
-  DEMO_PROFILE,
-  DEMO_REQUESTS,
+  EMPTY_PROFILE,
   STATUS_CLASS,
   STATUS_LABEL,
   buildMessage,
@@ -18,6 +17,7 @@ import {
   type BusinessProfile,
   type ReviewRequest,
 } from "@/lib/reviewpulse";
+
 
 const TITLE = "Dashboard — ReviewPulse";
 const DESCRIPTION =
@@ -39,11 +39,11 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
-  const [profile, setProfile] = useState<BusinessProfile>(DEMO_PROFILE);
-  const [requests, setRequests] = useState<ReviewRequest[]>(DEMO_REQUESTS);
+  const [profile, setProfile] = useState<BusinessProfile>(EMPTY_PROFILE);
+  const [requests, setRequests] = useState<ReviewRequest[]>([]);
   const [editing, setEditing] = useState(false);
-  const [firstName, setFirstName] = useState("Dana");
-  const [phone, setPhone] = useState("+1 (415) 808-2231");
+  const [firstName, setFirstName] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     setProfile(loadProfile());
@@ -94,7 +94,7 @@ function Dashboard() {
             </span>
           </div>
           <div className="grid size-9 place-items-center rounded-full bg-pulse-soft font-display text-sm text-pulse-ink">
-            PR
+            {profile.name.trim().charAt(0).toUpperCase() || "?"}
           </div>
         </div>
 
@@ -152,7 +152,7 @@ function Dashboard() {
                 </div>
               ) : (
                 <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-line pt-3 font-mono text-xs text-ink-muted">
-                  <span>{profile.city}</span>
+                  {profile.city ? <span>{profile.city}</span> : null}
                   <span>Requests this week: {sentThisWeek}</span>
                   <span>Reviewed: {reviewed}</span>
                   <button

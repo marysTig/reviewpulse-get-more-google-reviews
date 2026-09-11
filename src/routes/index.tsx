@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Logo } from "@/components/rp/Logo";
-import { DEMO_PROFILE } from "@/lib/reviewpulse";
 
 const TITLE = "ReviewPulse — Get More Google Reviews by WhatsApp";
 const DESCRIPTION =
@@ -118,29 +117,29 @@ function Landing() {
             <div className="mx-auto max-w-[330px] rounded-3xl border border-line bg-card p-3 shadow-sm">
               <div className="flex items-center gap-2 rounded-t-2xl bg-ink px-3 py-2.5">
                 <div className="grid size-8 place-items-center rounded-full bg-wa font-display text-sm text-on-dark">
-                  M
+                  &#9679;
                 </div>
                 <div className="leading-tight">
-                  <p className="text-[13px] font-semibold text-on-dark">{DEMO_PROFILE.name}</p>
+                  <p className="text-[13px] font-semibold text-on-dark">Your business</p>
                   <p className="font-mono text-[10px] text-on-dark/50">online</p>
                 </div>
-                <span className="ml-auto font-mono text-[10px] text-on-dark/50">12:04</span>
               </div>
               <div className="space-y-2 rounded-b-2xl bg-bubble px-3 py-4">
                 <div className="flex items-end gap-1.5">
                   <div className="max-w-[85%] rounded-xl rounded-tl-sm bg-card px-3 py-2 text-[13px] leading-snug text-ink shadow-sm">
-                    Hi Dana! Thanks for visiting {DEMO_PROFILE.name} today. If you enjoyed your
-                    visit, would you mind leaving us an honest Google review?
+                    Hi [Name]! Thanks for visiting [Your business] today. If you enjoyed your visit,
+                    would you mind leaving us an honest Google review?
                   </div>
                 </div>
                 <div className="flex items-end gap-1.5">
                   <div className="max-w-[85%] self-end rounded-xl rounded-tr-sm bg-bubble-out px-3 py-2 text-[13px] leading-snug text-ink shadow-sm">
-                    <span className="font-mono text-[12px] text-wa-ink">maps.app/rev/marigold</span>
+                    <span className="font-mono text-[12px] text-wa-ink">
+                      [Your Google review link]
+                    </span>
                   </div>
-                  <span className="font-mono text-[10px] text-ink-muted">12:04</span>
                 </div>
                 <div className="pt-1 font-mono text-[10px] text-ink-muted/70">
-                  Delivered &#10003;&#10003;
+                  Ready to send &#10003;
                 </div>
               </div>
             </div>
@@ -169,44 +168,6 @@ function Landing() {
           </div>
         </section>
 
-        <section className="grid gap-6 py-12 md:grid-cols-12">
-          <figure className="rise rounded-xl border border-line bg-card p-6 md:col-span-7">
-            <div className="flex items-center gap-1 text-warn" aria-label="5 star rating">
-              {[0, 1, 2, 3, 4].map((s) => (
-                <span key={s} className="font-display">
-                  &#9733;
-                </span>
-              ))}
-            </div>
-            <blockquote className="mt-3 max-w-[40ch] text-pretty font-display text-lg italic leading-snug">
-              &ldquo;We stopped emailing reviews. Now a nudge lands in their chat the same afternoon
-              — and the replies are actually warm.&rdquo;
-            </blockquote>
-            <figcaption className="mt-4 flex items-center gap-3">
-              <div className="grid size-9 place-items-center rounded-full bg-pulse-soft font-display text-sm text-pulse-ink">
-                PR
-              </div>
-              <div className="leading-tight">
-                <p className="text-sm font-semibold">Priya Raman</p>
-                <p className="font-mono text-xs text-ink-muted">Owner, {DEMO_PROFILE.name}</p>
-              </div>
-            </figcaption>
-          </figure>
-          <div className="grid gap-4 md:col-span-5">
-            <div className="rise rounded-xl border border-line bg-card p-5 [animation-delay:80ms]">
-              <p className="font-display text-3xl tracking-tight">+38%</p>
-              <p className="mt-1 text-sm text-ink-muted">
-                median lift in weekly review requests in the first month
-              </p>
-            </div>
-            <div className="rise rounded-xl border border-line bg-card p-5 [animation-delay:160ms]">
-              <p className="font-display text-3xl tracking-tight">4.9&#9733;</p>
-              <p className="mt-1 text-sm text-ink-muted">
-                average rating across 1,200+ local storefronts
-              </p>
-            </div>
-          </div>
-        </section>
 
         <section id="pricing" className="py-12">
           <div className="mx-auto max-w-md text-center">
