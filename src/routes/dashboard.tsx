@@ -39,11 +39,11 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
-  const [profile, setProfile] = useState<BusinessProfile>(DEMO_PROFILE);
-  const [requests, setRequests] = useState<ReviewRequest[]>(DEMO_REQUESTS);
+  const [profile, setProfile] = useState<BusinessProfile>(EMPTY_PROFILE);
+  const [requests, setRequests] = useState<ReviewRequest[]>([]);
   const [editing, setEditing] = useState(false);
-  const [firstName, setFirstName] = useState("Dana");
-  const [phone, setPhone] = useState("+1 (415) 808-2231");
+  const [firstName, setFirstName] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     setProfile(loadProfile());
