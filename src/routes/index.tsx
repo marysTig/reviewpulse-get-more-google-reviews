@@ -65,9 +65,10 @@ function Landing() {
           </nav>
           <Link
             to="/dashboard"
-            className="rounded-md bg-ink px-3.5 py-2 text-sm font-semibold text-on-dark transition-transform hover:-translate-y-0.5"
+            className="shrink-0 rounded-md bg-ink px-3.5 py-2 text-sm font-semibold text-on-dark transition-transform hover:-translate-y-0.5"
           >
-            Get More Google Reviews
+            <span className="hidden sm:inline">Get More Google Reviews</span>
+            <span className="sm:hidden">Get Reviews</span>
           </Link>
         </div>
       </header>
