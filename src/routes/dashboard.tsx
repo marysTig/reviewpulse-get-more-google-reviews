@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/rp/Logo";
 import {
-  DEMO_PROFILE,
-  DEMO_REQUESTS,
+  EMPTY_PROFILE,
   STATUS_CLASS,
   STATUS_LABEL,
   buildMessage,
@@ -18,6 +17,7 @@ import {
   type BusinessProfile,
   type ReviewRequest,
 } from "@/lib/reviewpulse";
+
 
 const TITLE = "Dashboard — ReviewPulse";
 const DESCRIPTION =

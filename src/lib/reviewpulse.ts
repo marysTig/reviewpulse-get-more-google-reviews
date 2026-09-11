@@ -71,12 +71,12 @@ const PROFILE_KEY = "reviewpulse.profile";
 const REQUESTS_KEY = "reviewpulse.requests";
 
 export function loadProfile(): BusinessProfile {
-  if (typeof window === "undefined") return DEMO_PROFILE;
+  if (typeof window === "undefined") return EMPTY_PROFILE;
   try {
     const raw = window.localStorage.getItem(PROFILE_KEY);
-    return raw ? { ...DEMO_PROFILE, ...JSON.parse(raw) } : DEMO_PROFILE;
+    return raw ? { ...EMPTY_PROFILE, ...JSON.parse(raw) } : EMPTY_PROFILE;
   } catch {
-    return DEMO_PROFILE;
+    return EMPTY_PROFILE;
   }
 }
 
@@ -89,14 +89,15 @@ export function saveProfile(profile: BusinessProfile) {
 }
 
 export function loadRequests(): ReviewRequest[] {
-  if (typeof window === "undefined") return DEMO_REQUESTS;
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(REQUESTS_KEY);
-    return raw ? (JSON.parse(raw) as ReviewRequest[]) : DEMO_REQUESTS;
+    return raw ? (JSON.parse(raw) as ReviewRequest[]) : [];
   } catch {
-    return DEMO_REQUESTS;
+    return [];
   }
 }
+
 
 export function saveRequests(requests: ReviewRequest[]) {
   try {
