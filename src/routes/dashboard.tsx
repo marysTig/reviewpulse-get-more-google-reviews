@@ -94,7 +94,7 @@ function Dashboard() {
             </span>
           </div>
           <div className="grid size-9 place-items-center rounded-full bg-pulse-soft font-display text-sm text-pulse-ink">
-            PR
+            {profile.name.trim().charAt(0).toUpperCase() || "?"}
           </div>
         </div>
 
@@ -152,7 +152,7 @@ function Dashboard() {
                 </div>
               ) : (
                 <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-line pt-3 font-mono text-xs text-ink-muted">
-                  <span>{profile.city}</span>
+                  {profile.city ? <span>{profile.city}</span> : null}
                   <span>Requests this week: {sentThisWeek}</span>
                   <span>Reviewed: {reviewed}</span>
                   <button
