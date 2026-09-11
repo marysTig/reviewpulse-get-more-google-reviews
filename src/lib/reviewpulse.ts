@@ -14,25 +14,12 @@ export type BusinessProfile = {
   city: string;
 };
 
-export const DEMO_PROFILE: BusinessProfile = {
-  name: "Marigold Floral",
-  reviewUrl: "https://maps.app.goo.gl/rev-marigold-floral",
-  city: "Portland, OR",
+export const EMPTY_PROFILE: BusinessProfile = {
+  name: "",
+  reviewUrl: "",
+  city: "",
 };
 
-function daysAgo(n: number) {
-  const d = new Date();
-  d.setDate(d.getDate() - n);
-  return d.toISOString();
-}
-
-export const DEMO_REQUESTS: ReviewRequest[] = [
-  { id: "r1", name: "Dana Torres", phone: "+1 (415) 808-2231", date: daysAgo(0), status: "reviewed" },
-  { id: "r2", name: "Marcus Chen", phone: "+1 (503) 555-0182", date: daysAgo(0), status: "clicked" },
-  { id: "r3", name: "Aisha Lewis", phone: "+1 (503) 555-0144", date: daysAgo(1), status: "sent" },
-  { id: "r4", name: "Jordan Blake", phone: "+1 (971) 555-0117", date: daysAgo(1), status: "clicked" },
-  { id: "r5", name: "Sofia Reyes", phone: "+1 (503) 555-0163", date: daysAgo(2), status: "reviewed" },
-];
 
 export const STATUS_LABEL: Record<RequestStatus, string> = {
   sent: "Sent",
