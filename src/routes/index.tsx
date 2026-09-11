@@ -146,6 +146,79 @@ function Landing() {
           </div>
         </section>
 
+        <section id="dashboard-preview" className="border-t border-line py-12">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="font-display text-2xl tracking-tight sm:text-3xl">
+              My account. Send review request.
+            </h2>
+            <span className="hidden font-mono text-xs text-ink-muted sm:block">dashboard</span>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rise rounded-2xl border border-line bg-card p-5 shadow-sm [animation-delay:80ms]">
+              <div className="flex items-center gap-2.5">
+                <div className="grid size-8 place-items-center rounded-full bg-pulse-soft font-display text-sm text-pulse-ink">
+                  A
+                </div>
+                <h3 className="font-display text-lg">My account</h3>
+              </div>
+              <p className="mt-2 text-sm text-ink-muted">
+                Set your business name and Google review link once.
+              </p>
+              <div className="mt-5 space-y-3">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+                    Business name
+                  </p>
+                  <div className="mt-1 truncate rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink-muted">
+                    [Your business]
+                  </div>
+                </div>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+                    Google review URL
+                  </p>
+                  <div className="mt-1 truncate rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink-muted">
+                    [Your Google review link]
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rise rounded-2xl border border-line bg-card p-5 shadow-sm [animation-delay:160ms]">
+              <div className="flex items-center gap-2.5">
+                <div className="grid size-8 place-items-center rounded-full bg-wa/15 font-display text-sm text-wa-ink">
+                  S
+                </div>
+                <h3 className="font-display text-lg">Send review request</h3>
+              </div>
+              <p className="mt-2 text-sm text-ink-muted">
+                Type a first name and phone number, then open WhatsApp.
+              </p>
+              <div className="mt-5 space-y-3">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+                    Customer first name
+                  </p>
+                  <div className="mt-1 rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink-muted">
+                    [Name]
+                  </div>
+                </div>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
+                    Phone number
+                  </p>
+                  <div className="mt-1 rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink-muted">
+                    [Phone number]
+                  </div>
+                </div>
+                <div className="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-wa px-4 py-2.5 text-sm font-semibold text-on-dark">
+                  Send WhatsApp request
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="how-it-works" className="border-t border-line py-12">
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="font-display text-2xl tracking-tight sm:text-3xl">
