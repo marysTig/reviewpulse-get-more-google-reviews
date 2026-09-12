@@ -1,14 +1,14 @@
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
-  const box = size === "sm" ? "size-7" : "size-8";
-  const glyph = size === "sm" ? "text-base" : "text-lg";
-  const word = size === "sm" ? "text-lg" : "text-xl";
+  const imageSize = size === "sm" ? "32px" : "40px";
 
   return (
     <span className="flex items-center gap-2.5">
-      <span className={`grid ${box} place-items-center rounded-md bg-pulse`}>
-        <span className={`font-display ${glyph} leading-none text-on-dark`}>&#42;</span>
-      </span>
-      <span className={`font-display ${word} tracking-tight`}>FiveRate</span>
+      <img 
+        src="/ChatGPT Image 12 sept. 2026, 01_08_30.png" 
+        alt="FiveRate Logo" 
+        style={{ width: imageSize, height: imageSize, borderRadius: "0.375rem" }}
+      />
+      <span className={`font-display ${size === "sm" ? "text-lg" : "text-xl"} tracking-tight`}>FiveRate</span>
     </span>
   );
 }

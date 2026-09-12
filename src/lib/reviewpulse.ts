@@ -1,9 +1,17 @@
-export type RequestStatus = "sent" | "clicked" | "reviewed";
+export type RequestStatus = "sent";
+
+export type Customer = {
+  id: string;
+  firstName: string;
+  phone: string;
+  createdAt: string; // ISO date
+};
 
 export type ReviewRequest = {
   id: string;
   name: string;
   phone: string;
+  customerId?: string; // Link to customer
   date: string; // ISO date
   status: RequestStatus;
 };
@@ -23,19 +31,16 @@ export const EMPTY_PROFILE: BusinessProfile = {
 
 export const STATUS_LABEL: Record<RequestStatus, string> = {
   sent: "Sent",
-  clicked: "Clicked",
-  reviewed: "Reviewed",
 };
 
 export const STATUS_CLASS: Record<RequestStatus, string> = {
-  sent: "bg-ink/5 text-ink-muted",
-  clicked: "bg-warn-soft text-warn-ink",
-  reviewed: "bg-pulse-soft text-pulse-ink",
+  sent: "bg-pulse-soft text-pulse-ink",
 };
 
 export function buildMessage(firstName: string, profile: BusinessProfile) {
   const name = firstName.trim() || "there";
-  return `Hi ${name}! Thanks for visiting ${profile.name} today. If you enjoyed your visit, would you mind leaving us an honest Google review? ${profile.reviewUrl}`;
+  const businessName = profile.name || "our business";
+  return `Hi ${name}! 👋\n\nThanks for visiting ${businessName} today.\n\nIf you enjoyed your experience, we'd really appreciate an honest Google review ⭐\n\n${profile.reviewUrl}`;
 }
 
 /** Digits only; assumes a US number when no country code is present. */
@@ -69,6 +74,7 @@ export function formatDate(iso: string) {
 
 const PROFILE_KEY = "reviewpulse.profile";
 const REQUESTS_KEY = "reviewpulse.requests";
+const CUSTOMERS_KEY = "reviewpulse.customers";
 
 export function loadProfile(): BusinessProfile {
   if (typeof window === "undefined") return EMPTY_PROFILE;
@@ -98,11 +104,55 @@ export function loadRequests(): ReviewRequest[] {
   }
 }
 
-
 export function saveRequests(requests: ReviewRequest[]) {
   try {
     window.localStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
   } catch {
     /* storage unavailable */
   }
+}
+
+export function loadCustomers(): Customer[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(CUSTOMERS_KEY);
+    return raw ? (JSON.parse(raw) as Customer[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCustomers(customers: Customer[]) {
+  try {
+    window.localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(customers));
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+export function addCustomer(firstName: string, phone: string): Customer {
+  const customer: Customer = {
+    id: `${Date.now()}`,
+    firstName: firstName.trim(),
+    phone: phone.trim(),
+    createdAt: new Date().toISOString(),
+  };
+  const customers = loadCustomers();
+  saveCustomers([customer, ...customers]);
+  return customer;
+}
+
+export function deleteCustomer(customerId: string) {
+  const customers = loadCustomers();
+  saveCustomers(customers.filter((c) => c.id !== customerId));
+}
+
+export function updateCustomer(customerId: string, firstName: string, phone: string) {
+  const customers = loadCustomers();
+  const updated = customers.map((c) =>
+    c.id === customerId
+      ? { ...c, firstName: firstName.trim(), phone: phone.trim() }
+      : c
+  );
+  saveCustomers(updated);
 }
