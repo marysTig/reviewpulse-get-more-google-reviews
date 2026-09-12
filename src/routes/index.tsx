@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Logo } from "@/components/rp/Logo";
 
-const TITLE = "ReviewPulse — Get More Google Reviews by WhatsApp";
+const TITLE = "FiveRate — Get More Google Reviews by WhatsApp";
 const DESCRIPTION =
-  "ReviewPulse helps US local businesses ask happy customers for honest Google reviews with one WhatsApp message. $10/month per location.";
+  "FiveRate helps US local businesses ask happy customers for honest Google reviews with one WhatsApp message. $10/month per location.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,7 +82,7 @@ function Landing() {
               Ask for reviews while the visit is still warm.
             </h1>
             <p className="mt-5 max-w-[46ch] text-pretty text-base text-ink-muted sm:text-lg">
-              ReviewPulse hands every happy customer a single, personal WhatsApp nudge to leave an
+              FiveRate hands every happy customer a single, personal WhatsApp nudge to leave an
               honest Google review. No cold email. No gatekeeping. Just the right words, at the
               right moment.
             </p>

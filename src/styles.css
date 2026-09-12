@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * ReviewPulse design system — "Counter Card".
+ * FiveRate design system — "Counter Card".
  * Warm paper background, ink text, a single green "pulse" accent,
  * amber for in-progress states, WhatsApp green for the send action.
  * All colors are oklch tokens. Never hardcode colors in components.
