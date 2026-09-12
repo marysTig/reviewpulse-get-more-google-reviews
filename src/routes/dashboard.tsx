@@ -19,7 +19,7 @@ import {
 } from "@/lib/reviewpulse";
 
 
-const TITLE = "Dashboard — ReviewPulse";
+const TITLE = "Dashboard — FiveRate";
 const DESCRIPTION =
   "Send a WhatsApp review request in seconds and track every request your business has sent.";
 

@@ -8,7 +8,7 @@ export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
       <span className={`grid ${box} place-items-center rounded-md bg-pulse`}>
         <span className={`font-display ${glyph} leading-none text-on-dark`}>&#42;</span>
       </span>
-      <span className={`font-display ${word} tracking-tight`}>ReviewPulse</span>
+      <span className={`font-display ${word} tracking-tight`}>FiveRate</span>
     </span>
   );
 }
