@@ -116,9 +116,9 @@ function Dashboard() {
     try {
       await updateBusinessAccount(businessAccount.id, profile);
       setEditing(false);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to update profile", err);
-      setProfileError("Failed to save.");
+      setProfileError(err?.message || "Failed to save profile. Make sure database columns are updated.");
     } finally {
       setIsSavingProfile(false);
     }
