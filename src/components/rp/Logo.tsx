@@ -1,5 +1,3 @@
-import logoAsset from "@/assets/five-rate-logo.png.asset.json";
-
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
   const box = size === "sm" ? "size-7" : "size-8";
   const word = size === "sm" ? "text-lg" : "text-xl";
@@ -7,7 +5,7 @@ export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
   return (
     <span className="flex items-center gap-2.5">
       <img
-        src={logoAsset.url}
+        src="/ChatGPT Image 12 sept. 2026, 01_08_30.png"
         alt=""
         className={`${box} rounded-md object-cover`}
       />

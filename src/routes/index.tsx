@@ -4,7 +4,7 @@ import { Logo } from "@/components/rp/Logo";
 
 const TITLE = "FiveRate — Get More 5-Star Google Reviews";
 const DESCRIPTION =
-  "FiveRate makes it easy to turn happy customers into more Google reviews. Send personalized review requests via WhatsApp and watch your reputation grow. $10/month per location.";
+  "FiveRate makes it easy to turn happy customers into more Google reviews. Send personalized review requests via WhatsApp and watch your reputation grow. Free to start.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,11 +38,20 @@ const STEPS = [
   },
 ];
 
-const PLAN_FEATURES = [
-  "Unlimited review requests",
-  "Personalized WhatsApp messages",
-  "Customer history",
-  "Review growth dashboard",
+const FREE_FEATURES = [
+  "Business profile & QR code",
+  "Up to 10 customers",
+  "5 WhatsApp requests / month",
+  "Basic dashboard & history",
+];
+
+const PRO_FEATURES = [
+  "Unlimited customers",
+  "Unlimited WhatsApp requests",
+  "Full dashboard analytics",
+  "Full request history",
+  "Priority support",
+  "All core FiveRate features",
 ];
 
 function Landing() {
@@ -91,12 +100,12 @@ function Landing() {
               >
                 Get More Reviews →
               </Link>
-              <Link
-                to="/#how-it-works"
+              <a
+                href="#how-it-works"
                 className="rounded-md border border-line bg-card px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
               >
                 See how it works
-              </Link>
+              </a>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-5 font-mono text-xs text-ink-muted">
               <span className="flex items-center gap-1.5">
@@ -106,7 +115,7 @@ function Landing() {
                 <span className="size-1.5 rounded-full bg-pulse" /> Works on any phone
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-pulse" /> $10 / month
+                <span className="size-1.5 rounded-full bg-pulse" /> Free to start
               </span>
             </div>
           </div>
@@ -221,27 +230,75 @@ function Landing() {
 
 
         <section id="pricing" className="py-12">
-          <div className="mx-auto max-w-md text-center">
+          <div className="text-center mb-8">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-pulse">
-              Start growing your reputation
+              Simple pricing
             </p>
-            <h2 className="mt-3 font-display text-3xl tracking-tight">$10 / month / location</h2>
+            <h2 className="mt-3 font-display text-3xl tracking-tight">Start free, upgrade when you're ready</h2>
             <p className="mt-2 text-sm text-ink-muted">
-              Get more reviews without manually following up with every customer.
+              No credit card required to get started.
             </p>
-            <div className="rise mt-6 rounded-2xl border border-pulse/30 bg-card p-6 text-left shadow-sm">
-              <ul className="space-y-3 text-sm">
-                {PLAN_FEATURES.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2.5">
-                    <span className="size-1.5 rounded-full bg-pulse" /> {feature}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
+            {/* Free plan */}
+            <div className="rise rounded-2xl border border-line bg-card p-6 flex flex-col">
+              <div className="mb-4">
+                <span className="inline-block font-mono text-[10px] uppercase tracking-widest text-ink-muted bg-line px-2 py-0.5 rounded-full">
+                  Free
+                </span>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span className="font-display text-4xl tracking-tight">$0</span>
+                  <span className="text-sm text-ink-muted">/month</span>
+                </div>
+                <p className="mt-1 text-xs text-ink-muted">Try FiveRate with no commitment</p>
+              </div>
+              <ul className="space-y-2.5 text-sm flex-1 mb-6">
+                {FREE_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5">
+                    <span className="size-1.5 rounded-full bg-ink-muted flex-shrink-0" />
+                    <span className="text-ink-muted">{f}</span>
                   </li>
                 ))}
               </ul>
               <Link
-                to="/dashboard"
-                className="mt-6 block rounded-md bg-pulse px-4 py-3 text-center text-sm font-semibold text-on-dark transition-transform hover:-translate-y-0.5"
+                to="/signup"
+                className="block rounded-md border border-line bg-paper px-4 py-2.5 text-center text-sm font-semibold text-ink transition-colors hover:border-ink/30"
               >
-                Start getting more reviews →
+                Start for free →
+              </Link>
+            </div>
+
+            {/* Pro plan */}
+            <div className="rise rounded-2xl border-2 border-pulse bg-card p-6 flex flex-col shadow-sm relative [animation-delay:80ms]">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="inline-block font-mono text-[10px] uppercase tracking-widest bg-pulse text-on-dark px-3 py-0.5 rounded-full shadow">
+                  Most popular
+                </span>
+              </div>
+              <div className="mb-4">
+                <span className="inline-block font-mono text-[10px] uppercase tracking-widest text-pulse-ink bg-pulse-soft px-2 py-0.5 rounded-full">
+                  Pro
+                </span>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span className="font-display text-4xl tracking-tight">$9.99</span>
+                  <span className="text-sm text-ink-muted">/month</span>
+                </div>
+                <p className="mt-1 text-xs text-ink-muted">Everything you need to grow</p>
+              </div>
+              <ul className="space-y-2.5 text-sm flex-1 mb-6">
+                {PRO_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5">
+                    <span className="size-1.5 rounded-full bg-pulse flex-shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/upgrade"
+                className="block rounded-md bg-pulse px-4 py-2.5 text-center text-sm font-semibold text-on-dark transition-transform hover:-translate-y-0.5"
+              >
+                Upgrade to Pro →
               </Link>
             </div>
           </div>

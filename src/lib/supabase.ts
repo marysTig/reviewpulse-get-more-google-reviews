@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
+const supabaseUrl = (import.meta.env['VITE_SUPABASE_URL'] as string) || "";
+const supabaseAnonKey = (import.meta.env['VITE_SUPABASE_ANON_KEY'] as string) || "";
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -13,15 +13,18 @@ export type AuthUser = {
 
 export type BusinessAccount = {
   id: string;
-  userId: string;
-  businessName: string;
-  googleReviewUrl: string;
+  user_id: string;
+  business_name: string;
+  phone?: string;
+  google_review_url: string;
   location: string;
-  isPaid: boolean;
-  stripeCustomerId?: string;
-  lemonsqueezyCustomerId?: string;
-  createdAt: string;
-  updatedAt: string;
+  city?: string;
+  logo_url?: string;
+  is_paid: boolean;
+  lemonsqueezy_customer_id?: string;
+  lemonsqueezy_subscription_id?: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export async function signUp(
@@ -98,18 +101,18 @@ export async function updatePassword(newPassword: string) {
 
 export async function createBusinessAccount(
   userId: string,
-  businessName: string
+  businessName: string,
+  phone: string
 ): Promise<BusinessAccount> {
   const { data, error } = await supabase
     .from("business_accounts")
     .insert({
-      userId,
-      businessName,
-      googleReviewUrl: "",
+      user_id: userId,
+      business_name: businessName,
+      phone,
+      google_review_url: "",
       location: "",
-      isPaid: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      is_paid: false,
     })
     .select()
     .single();
@@ -122,7 +125,7 @@ export async function getBusinessAccount(userId: string) {
   const { data, error } = await supabase
     .from("business_accounts")
     .select("*")
-    .eq("userId", userId)
+    .eq("user_id", userId)
     .single();
 
   if (error && error.code !== "PGRST116") throw error;
@@ -137,7 +140,7 @@ export async function updateBusinessAccount(
     .from("business_accounts")
     .update({
       ...updates,
-      updatedAt: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     })
     .eq("id", accountId)
     .select()

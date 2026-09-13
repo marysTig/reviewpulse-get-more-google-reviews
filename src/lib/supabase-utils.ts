@@ -1,17 +1,17 @@
-import { supabase, BusinessAccount } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export type Customer = {
   id: string;
-  accountId: string;
-  firstName: string;
+  account_id: string;
+  first_name: string;
   phone: string;
-  createdAt: string;
+  created_at: string;
 };
 
 export type ReviewRequest = {
   id: string;
-  accountId: string;
-  customerId?: string;
+  account_id: string;
+  customer_id?: string;
   name: string;
   phone: string;
   date: string;
@@ -20,12 +20,12 @@ export type ReviewRequest = {
 
 export type Subscription = {
   id: string;
-  accountId: string;
-  lemonsqueezySubscriptionId: string;
+  account_id: string;
+  lemonsqueezy_subscription_id: string;
   status: "active" | "cancelled" | "expired";
-  currentPeriodEnd: string;
-  createdAt: string;
-  updatedAt: string;
+  current_period_end: string;
+  created_at: string;
+  updated_at: string;
 };
 
 // Customers
@@ -37,10 +37,9 @@ export async function addCustomer(
   const { data, error } = await supabase
     .from("customers")
     .insert({
-      accountId,
-      firstName,
+      account_id: accountId,
+      first_name: firstName,
       phone,
-      createdAt: new Date().toISOString(),
     })
     .select()
     .single();
@@ -49,18 +48,12 @@ export async function addCustomer(
   return data;
 }
 
-export function loadCustomers(accountId: string): Customer[] {
-  // This is a fallback if we need to use localStorage temporarily
-  // In production, this would fetch from Supabase
-  return [];
-}
-
 export async function getCustomers(accountId: string): Promise<Customer[]> {
   const { data, error } = await supabase
     .from("customers")
     .select("*")
-    .eq("accountId", accountId)
-    .order("createdAt", { ascending: false });
+    .eq("account_id", accountId)
+    .order("created_at", { ascending: false });
 
   if (error) throw error;
   return data || [];
@@ -73,7 +66,7 @@ export async function updateCustomer(
 ): Promise<Customer> {
   const { data, error } = await supabase
     .from("customers")
-    .update({ firstName, phone })
+    .update({ first_name: firstName, phone })
     .eq("id", customerId)
     .select()
     .single();
@@ -98,8 +91,8 @@ export async function addReviewRequest(
   const { data, error } = await supabase
     .from("review_requests")
     .insert({
-      accountId,
-      customerId,
+      account_id: accountId,
+      customer_id: customerId,
       name,
       phone,
       date: new Date().toISOString(),
@@ -116,11 +109,26 @@ export async function getReviewRequests(accountId: string): Promise<ReviewReques
   const { data, error } = await supabase
     .from("review_requests")
     .select("*")
-    .eq("accountId", accountId)
+    .eq("account_id", accountId)
     .order("date", { ascending: false });
 
   if (error) throw error;
   return data || [];
+}
+
+/** Count review requests sent in the current calendar month (UTC). */
+export async function getMonthlyRequestCount(accountId: string): Promise<number> {
+  const now = new Date();
+  const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
+
+  const { count, error } = await supabase
+    .from("review_requests")
+    .select("id", { count: "exact", head: true })
+    .eq("account_id", accountId)
+    .gte("date", monthStart);
+
+  if (error) throw error;
+  return count ?? 0;
 }
 
 // Subscriptions
@@ -132,12 +140,10 @@ export async function createSubscription(
   const { data, error } = await supabase
     .from("subscriptions")
     .insert({
-      accountId,
-      lemonsqueezySubscriptionId,
+      account_id: accountId,
+      lemonsqueezy_subscription_id: lemonsqueezySubscriptionId,
       status: "active",
-      currentPeriodEnd,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      current_period_end: currentPeriodEnd,
     })
     .select()
     .single();
@@ -150,7 +156,7 @@ export async function getSubscription(accountId: string): Promise<Subscription |
   const { data, error } = await supabase
     .from("subscriptions")
     .select("*")
-    .eq("accountId", accountId)
+    .eq("account_id", accountId)
     .eq("status", "active")
     .single();
 
@@ -167,7 +173,6 @@ export async function updateSubscriptionStatus(
     .from("subscriptions")
     .update({
       status,
-      updatedAt: new Date().toISOString(),
     })
     .eq("id", subscriptionId)
     .select()

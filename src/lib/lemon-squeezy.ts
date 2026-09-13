@@ -3,8 +3,8 @@
  * Handles subscription creation, verification, and management
  */
 
-const apiKey = import.meta.env.VITE_LEMON_SQUEEZY_API_KEY;
-const storeId = import.meta.env.VITE_LEMON_SQUEEZY_STORE_ID;
+const apiKey = import.meta.env['VITE_LEMON_SQUEEZY_API_KEY'];
+const storeId = import.meta.env['VITE_LEMON_SQUEEZY_STORE_ID'];
 
 if (!apiKey) {
   console.warn("VITE_LEMON_SQUEEZY_API_KEY not set. Payment features will not work.");
