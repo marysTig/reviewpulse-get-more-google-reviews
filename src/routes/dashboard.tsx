@@ -859,7 +859,7 @@ function Dashboard() {
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-xl font-display mb-3">Your Custom QR Code</h3>
                 <p className="text-ink-muted text-sm mb-6">
-                  Print this QR code and place it on your counter or tables. When customers scan it with their phone camera, they will be taken directly to your Google Review page.
+                  Print this QR code and place it on your counter or tables. When customers scan it with their phone camera, they will be taken to a page with your Google Maps and Instagram links.
                 </p>
                 <div className="bg-paper p-4 rounded-lg border border-line mb-6">
                   <p className="font-mono text-xs text-ink-muted mb-1 uppercase tracking-wide">Destination URL</p>
