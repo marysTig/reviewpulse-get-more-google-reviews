@@ -26,6 +26,7 @@ import { Route as AdminRequestsRouteImport } from './routes/admin/requests'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSubscriptionsRouteImport } from './routes/admin/subscriptions'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as LinksAccountIdRouteImport } from './routes/links.$accountId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -112,6 +113,11 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
+const LinksAccountIdRoute = LinksAccountIdRouteImport.update({
+  id: '/links/$accountId',
+  path: '/links/$accountId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/links/$accountId': typeof LinksAccountIdRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/links/$accountId': typeof LinksAccountIdRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/links/$accountId': typeof LinksAccountIdRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/links/$accountId'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/links/$accountId'
     | '/admin'
   id:
     | '__root__'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/links/$accountId'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   SignupRoute: typeof SignupRoute
   UpgradeRoute: typeof UpgradeRoute
+  LinksAccountIdRoute: typeof LinksAccountIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -362,6 +375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/links/$accountId': {
+      id: '/links/$accountId'
+      path: '/links/$accountId'
+      fullPath: '/links/$accountId'
+      preLoaderRoute: typeof LinksAccountIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -399,6 +419,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   SignupRoute: SignupRoute,
   UpgradeRoute: UpgradeRoute,
+  LinksAccountIdRoute: LinksAccountIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

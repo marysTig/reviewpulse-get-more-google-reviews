@@ -54,7 +54,8 @@ function AdminQRCodes() {
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {businesses.map((biz) => {
-            const qrUrl = buildQrUrl(biz.google_review_url);
+            const linktreeUrl = `${window.location.origin}/links/${biz.id}`;
+            const qrUrl = buildQrUrl(linktreeUrl);
             return (
               <div key={biz.id} className="bg-card border border-line rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                 {/* QR Code image */}
@@ -78,13 +79,13 @@ function AdminQRCodes() {
 
                   <div className="flex flex-col gap-2">
                     <a
-                      href={biz.google_review_url}
+                      href={linktreeUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-1.5 text-xs font-medium text-wa-ink hover:underline truncate"
+                      className="flex items-center gap-1.5 text-xs font-medium text-pulse hover:underline truncate"
                     >
                       <ExternalLink className="size-3 shrink-0" />
-                      <span className="truncate">{biz.google_review_url}</span>
+                      <span className="truncate">View Linktree</span>
                     </a>
                     <a
                       href={qrUrl}

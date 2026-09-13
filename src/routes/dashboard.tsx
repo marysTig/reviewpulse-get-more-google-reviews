@@ -95,6 +95,8 @@ function Dashboard() {
       setProfile({
         business_name: businessAccount.business_name || "",
         google_review_url: businessAccount.google_review_url || "",
+        google_maps_url: businessAccount.google_maps_url || "",
+        instagram_url: businessAccount.instagram_url || "",
         city: businessAccount.city || "",
         logo_url: businessAccount.logo_url || "",
       });
@@ -723,12 +725,22 @@ function Dashboard() {
             />
           </label>
           <label className="block">
-            <span className="font-mono text-xs uppercase tracking-wide text-ink-muted">Google review URL</span>
+            <span className="font-mono text-xs uppercase tracking-wide text-ink-muted">Google Maps URL</span>
             <input
-              value={profile.google_review_url}
-              onChange={(e) => setProfile({ ...profile, google_review_url: e.target.value })}
+              value={profile.google_maps_url || profile.google_review_url}
+              onChange={(e) => setProfile({ ...profile, google_maps_url: e.target.value, google_review_url: e.target.value })}
               className="mt-1.5 w-full rounded-md border border-line bg-paper px-4 py-3 font-mono text-sm outline-none transition focus:border-pulse"
-              placeholder="https://g.page/acme-cafe"
+              placeholder="https://g.page/review/..."
+            />
+            <p className="mt-1 text-[11px] text-ink-muted">Paste your direct Google Review link here.</p>
+          </label>
+          <label className="block">
+            <span className="font-mono text-xs uppercase tracking-wide text-ink-muted">Instagram Profile</span>
+            <input
+              value={profile.instagram_url || ""}
+              onChange={(e) => setProfile({ ...profile, instagram_url: e.target.value })}
+              className="mt-1.5 w-full rounded-md border border-line bg-paper px-4 py-3 font-mono text-sm outline-none transition focus:border-pulse"
+              placeholder="https://instagram.com/yourbusiness"
             />
           </label>
           <label className="block">
@@ -812,9 +824,10 @@ function Dashboard() {
   );
 
   const renderQrApp = () => {
-    const reviewUrl = profile.google_review_url?.trim();
-    const qrUrl = reviewUrl 
-      ? `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(reviewUrl)}` 
+    const hasLinks = !!(profile.google_maps_url || profile.google_review_url || profile.instagram_url);
+    const linktreeUrl = `${window.location.origin}/links/${businessAccount?.id}`;
+    const qrUrl = hasLinks 
+      ? `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(linktreeUrl)}` 
       : null;
 
     return (
@@ -825,14 +838,14 @@ function Dashboard() {
         </div>
         
         <div className="rounded-xl border border-line bg-card p-8">
-          {!reviewUrl ? (
+          {!hasLinks ? (
             <div className="text-center py-12">
               <div className="mx-auto size-16 bg-pulse/10 text-pulse rounded-full flex items-center justify-center mb-4">
                 <QrCode className="size-8" />
               </div>
-              <h3 className="text-lg font-display mb-2">Google Review Link Missing</h3>
+              <h3 className="text-lg font-display mb-2">No Links Added</h3>
               <p className="text-ink-muted text-sm max-w-md mx-auto mb-6">
-                You need to set up your Google review link in your Business Profile before generating a QR code.
+                You need to set up at least one link (Google Maps or Instagram) in your Business Profile before generating a QR code.
               </p>
               <button
                 onClick={() => setActiveApp('business')}
@@ -850,8 +863,8 @@ function Dashboard() {
                 </p>
                 <div className="bg-paper p-4 rounded-lg border border-line mb-6">
                   <p className="font-mono text-xs text-ink-muted mb-1 uppercase tracking-wide">Destination URL</p>
-                  <a href={reviewUrl} target="_blank" rel="noreferrer" className="text-wa-ink hover:underline break-all text-sm">
-                    {reviewUrl}
+                  <a href={linktreeUrl} target="_blank" rel="noreferrer" className="text-pulse hover:underline break-all text-sm">
+                    {linktreeUrl}
                   </a>
                 </div>
                 <a 

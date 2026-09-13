@@ -17,6 +17,8 @@ export type BusinessAccount = {
   business_name: string;
   phone?: string;
   google_review_url: string;
+  google_maps_url?: string;
+  instagram_url?: string;
   location: string;
   city?: string;
   logo_url?: string;

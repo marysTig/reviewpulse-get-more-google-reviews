@@ -13,7 +13,8 @@ export const STATUS_CLASS: Record<RequestStatus, string> = {
 export function buildMessage(firstName: string, account: BusinessAccount) {
   const name = firstName.trim() || "there";
   const businessName = account.business_name || "our business";
-  return `Hi ${name}! 👋\n\nThanks for visiting ${businessName} today.\n\nIf you enjoyed your experience, we'd really appreciate an honest Google review ⭐\n\n${account.google_review_url}`;
+  const reviewLink = account.google_maps_url || account.google_review_url || "";
+  return `Hi ${name}! 👋\n\nThanks for visiting ${businessName} today.\n\nIf you enjoyed your experience, we'd really appreciate an honest Google review ⭐\n\n${reviewLink}`;
 }
 
 import { parsePhoneNumber } from "libphonenumber-js";
