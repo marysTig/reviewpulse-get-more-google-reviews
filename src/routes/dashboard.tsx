@@ -80,6 +80,7 @@ function Dashboard() {
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [profileError, setProfileError] = useState<string | null>(null);
+  const [customMessage, setCustomMessage] = useState("");
 
   // Require login
   useEffect(() => {
@@ -210,7 +211,7 @@ function Dashboard() {
       const activeCustomerId = selectedCustomerIndex !== null ? customers[selectedCustomerIndex]?.id : undefined;
       const newRequest = await addReviewRequest(businessAccount.id, firstName.trim(), phone.trim(), activeCustomerId);
       setRequests([newRequest, ...requests]);
-      window.open(buildWhatsAppLink(phone, message), "_blank", "noopener,noreferrer");
+      window.open(buildWhatsAppLink(phone, customMessage || message), "_blank", "noopener,noreferrer");
 
       if (selectedCustomerIndex !== null) {
         const targetIds = selectedCustomerIds.size > 0 ? Array.from(selectedCustomerIds) : customers.map(c => c.id);
@@ -248,12 +249,14 @@ function Dashboard() {
     setSelectedCustomerIndex(index);
     setFirstName(customer.first_name);
     setPhone(customer.phone);
+    setCustomMessage(buildMessage(customer.first_name, profile as BusinessAccount));
   }
 
   function cancelSequentialSend() {
     setSelectedCustomerIndex(null);
     setFirstName("");
     setPhone("");
+    setCustomMessage("");
   }
 
   function getCustomerStatus(customer: Customer) {
@@ -587,17 +590,27 @@ function Dashboard() {
                     </div>
                   </div>
 
-                  {/* Message preview */}
+                  {/* Editable message */}
                   <div>
-                    <p className="font-mono text-xs uppercase tracking-wide text-ink-muted mb-2">Generated message</p>
-                    <div className="rounded-lg border border-line bg-paper p-5 text-sm leading-relaxed text-ink-muted shadow-inner space-y-2">
-                      <p className="font-medium text-ink">Hi {activeCustomer.first_name}! 👋</p>
-                      <p>Thanks for visiting <span className="font-medium text-ink">{profile.business_name || "our business"}</span> today.</p>
-                      <p>If you enjoyed your experience, we'd really appreciate an honest Google review ⭐</p>
-                      {profile.google_review_url && (
-                        <p className="break-all font-mono text-xs text-wa-ink bg-wa-ink/5 p-2 rounded-md">{profile.google_review_url}</p>
-                      )}
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="font-mono text-xs uppercase tracking-wide text-ink-muted">Message</p>
+                      <button
+                        onClick={() => setCustomMessage(buildMessage(activeCustomer.first_name, profile as BusinessAccount))}
+                        className="text-xs text-ink-muted hover:text-pulse transition-colors"
+                      >
+                        ↺ Reset to default
+                      </button>
                     </div>
+                    <textarea
+                      value={customMessage}
+                      onChange={(e) => setCustomMessage(e.target.value)}
+                      rows={8}
+                      className="w-full rounded-lg border border-line bg-paper px-4 py-3 text-sm leading-relaxed text-ink outline-none transition focus:border-pulse resize-none shadow-inner"
+                      placeholder="Type your message here..."
+                    />
+                    <p className="mt-1.5 text-[11px] text-ink-muted font-mono">
+                      {customMessage.length} characters — edit freely, the message will be sent exactly as shown.
+                    </p>
                   </div>
 
                   {/* Send button */}
