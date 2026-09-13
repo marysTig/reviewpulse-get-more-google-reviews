@@ -249,6 +249,7 @@ function Dashboard() {
     setSelectedCustomerIndex(index);
     setFirstName(customer.first_name);
     setPhone(customer.phone);
+    setIsPhoneValid(true); // phone from a saved customer is already validated
     setCustomMessage(buildMessage(customer.first_name, profile as BusinessAccount));
   }
 
@@ -624,7 +625,7 @@ function Dashboard() {
                   ) : (
                     <button
                       onClick={handleSend}
-                      disabled={isSaving}
+                      disabled={!canSend || isSaving}
                       className="w-full rounded-md bg-wa-ink px-4 py-3 text-sm font-semibold text-on-dark transition-transform hover:-translate-y-0.5 disabled:opacity-40 shadow-sm"
                     >
                       {isSaving ? "Sending..." : `Send to ${activeCustomer.first_name} via WhatsApp`}
